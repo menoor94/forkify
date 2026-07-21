@@ -82,7 +82,7 @@ class recipeView {
     return `
       <li class="text-sm lg:text-base w-full lg:w-2/5 ">
       <i class="fa fa-check text-primary"></i>
-       ${!ing.quantity ? "" : new Fraction(ing.quantity)} 
+       ${!ing.quantity ? "" : ing.quantity} 
       ${ing.unit} 
       
        ${ing.description}</li>
