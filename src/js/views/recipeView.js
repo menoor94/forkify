@@ -13,7 +13,7 @@ class recipeView {
     this.#parentElement.innerHTML = "";
   }
 
-  renderSpinner() {
+  _renderSpinner() {
     const html = `
     <div class="w-full ">
           <img src="./src/img/spinner.gif" >

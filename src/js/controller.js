@@ -12,7 +12,7 @@ async function getData() {
     const id = window.location.hash.slice(1);
 
     if (!id) return;
-    recipeView.renderSpinner();
+    recipeView._renderSpinner();
     await model.loadRecipe(id);
 
     recipeView.render(model.state.recipe);
@@ -25,19 +25,7 @@ async function getData() {
   }
 }
 
-// const recipes = await getData();
-
-// console.log(recipes);
-
 ["load", "hashchange"].forEach(e => window.addEventListener(e, getData));
-
-// console.log(window.location.hash);
-// const tag = document.querySelectorAll(".tag");
-// tag.forEach(t => {
-//   t.addEventListener("click", () => {
-//     return console.log(window.location.hash);
-//   });
-// });
 
 const AllIds = fetch("https://forkify-api.jonas.io/api/v2/recipes?search=rice");
 AllIds.then(res => res.json()).then(data => console.log(data));

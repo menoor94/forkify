@@ -7,9 +7,9 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-orange-300: oklch(83.7% 0.128 66.29);
     --color-amber-50: oklch(98.7% 0.022 95.277);
     --color-amber-300: oklch(87.9% 0.169 91.605);
-    --color-yellow-100: oklch(97.3% 0.071 103.193);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -33,9 +33,6 @@
     --color-primary: #f38e82;
     --color-grad-1: #fbdb89;
     --color-grad-2: #f48982;
-    --color-grey-light-1: #f9f5f3;
-    --color-grey-light-2: #f2efee;
-    --color-grey-light-3: #d3c7c3;
     --color-grey-dark-1: #615551;
     --color-grey-dark-2: #918581;
   }
@@ -258,17 +255,11 @@
   .w-1\/3 {
     width: calc(1 / 3 * 100%);
   }
-  .w-1\/4 {
-    width: calc(1 / 4 * 100%);
-  }
   .w-2 {
     width: calc(var(--spacing) * 2);
   }
   .w-2\/3 {
     width: calc(2 / 3 * 100%);
-  }
-  .w-2\/4 {
-    width: calc(2 / 4 * 100%);
   }
   .w-2\/5 {
     width: calc(2 / 5 * 100%);
@@ -333,12 +324,6 @@
   .gap-y-5 {
     row-gap: calc(var(--spacing) * 5);
   }
-  .overflow-auto {
-    overflow: auto;
-  }
-  .overflow-clip {
-    overflow: clip;
-  }
   .overflow-scroll {
     overflow: scroll;
   }
@@ -358,8 +343,17 @@
   .bg-amber-50 {
     background-color: var(--color-amber-50);
   }
-  .bg-amber-300 {
-    background-color: var(--color-amber-300);
+  .bg-grad-1 {
+    background-color: var(--color-grad-1);
+  }
+  .bg-grad-2 {
+    background-color: var(--color-grad-2);
+  }
+  .bg-orange-300 {
+    background-color: var(--color-orange-300);
+  }
+  .bg-primary {
+    background-color: var(--color-primary);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -421,12 +415,6 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
-  .text-\[5px\] {
-    font-size: 5px;
-  }
-  .text-\[8px\] {
-    font-size: 8px;
-  }
   .text-\[12px\] {
     font-size: 12px;
   }
@@ -439,9 +427,6 @@
   }
   .text-wrap {
     text-wrap: wrap;
-  }
-  .text-blue-500 {
-    color: var(--color-blue-500);
   }
   .text-grey-dark-1 {
     color: var(--color-grey-dark-1);
