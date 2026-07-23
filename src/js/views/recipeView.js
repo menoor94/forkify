@@ -1,6 +1,7 @@
 class recipeView {
   #parentElement = document.getElementById("recipe-container");
   #data;
+  #errorMessage = "We could not find that recipe , please try another one !";
 
   render(data) {
     this.#data = data;
@@ -13,6 +14,10 @@ class recipeView {
     this.#parentElement.innerHTML = "";
   }
 
+  _addHandlerRender(handler) {
+    ["load", "hashchange"].forEach(e => window.addEventListener(e, handler));
+  }
+
   _renderSpinner() {
     const html = `
     <div class="w-full ">
@@ -23,6 +28,21 @@ class recipeView {
 
     this.#parentElement.innerHTML = " ";
     this.#parentElement.insertAdjacentHTML("afterbegin", html);
+  }
+
+  _renderError(message = this.#errorMessage) {
+    const markup = `
+      <div class="flex p-4 items-center">
+      <div>
+        <i class="fa fa-triangle-exclamation text-primary lg:text-2xl"></i>
+      </div>
+
+      <p class="text-primary lg:text-2xl">${message}</p>
+    </div>
+    `;
+
+    this.#parentElement.innerHTML = " ";
+    this.#parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
   #generateMarkup() {

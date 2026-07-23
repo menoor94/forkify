@@ -7,7 +7,7 @@ import recipeView from "./views/recipeView.js";
 const recipeContainer = document.getElementById("recipe-container");
 const startingText = document.getElementById("starting-text");
 
-async function getData() {
+async function controlRecipes() {
   try {
     const id = window.location.hash.slice(1);
 
@@ -16,16 +16,17 @@ async function getData() {
     await model.loadRecipe(id);
 
     recipeView.render(model.state.recipe);
-
-    // recipeContainer.innerHTML = markup;
-
-    // startingText.innerHTML = "";
   } catch (e) {
-    console.error(e);
+    console.error(`${e} yooooooooooooo`);
+    recipeView._renderError();
   }
 }
 
-["load", "hashchange"].forEach(e => window.addEventListener(e, getData));
+function init() {
+  recipeView._addHandlerRender(controlRecipes);
+}
 
-const AllIds = fetch("https://forkify-api.jonas.io/api/v2/recipes?search=rice");
-AllIds.then(res => res.json()).then(data => console.log(data));
+init();
+
+// const AllIds = fetch("https://forkify-api.jonas.io/api/v2/recipes?search=rice");
+// AllIds.then(res => res.json()).then(data => console.log(data));
