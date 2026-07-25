@@ -2,15 +2,19 @@
 
 import { API_URL } from "./config.js";
 import { getJSON } from "./helpers.js";
-import recipeView from "./views/recipeView.js";
+import RecipeView from "./views/recipeView.js";
 
 export const state = {
   recipe: {},
+  search: {
+    query: "",
+    results: [],
+  },
 };
 
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await getJSON(`${API_URL}${id}`);
 
     let { recipe } = data.data;
 
@@ -26,6 +30,25 @@ export const loadRecipe = async function (id) {
     };
   } catch (err) {
     console.warn(err);
+    throw err;
+  }
+};
+
+export const loadSearchResult = async function (query) {
+  try {
+    state.search.query = query;
+
+    const data = await getJSON(`${API_URL}?search=${query}`);
+
+    state.search.results = data.data.recipes.map(rec => {
+      return {
+        title: rec.title,
+        id: rec.id,
+        publisher: rec.publisher,
+        image: rec.image_url,
+      };
+    });
+  } catch (err) {
     throw err;
   }
 };

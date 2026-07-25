@@ -1,4 +1,4 @@
-class recipeView {
+class RecipeView {
   #parentElement = document.getElementById("recipe-container");
   #data;
   #errorMessage = "We could not find that recipe , please try another one !";
@@ -109,4 +109,4 @@ class recipeView {
     `;
   }
 }
-export default new recipeView();
+export default new RecipeView();
