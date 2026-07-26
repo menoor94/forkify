@@ -3,6 +3,7 @@
 import * as model from "./model.js";
 import RecipeView from "./views/recipeView.js";
 import SearchView from "./views/searchView.js";
+import ResultsView from "./views/resultsView.js";
 
 //https://forkify-api.herokuapp.com/v2
 const recipeContainer = document.getElementById("recipe-container");
@@ -13,10 +14,11 @@ async function controlRecipes() {
     const id = window.location.hash.slice(1);
 
     if (!id) return;
-    RecipeView._renderSpinner();
+    ResultsView.renderSpinner();
+    RecipeView.renderSpinner();
     await model.loadRecipe(id);
-
     RecipeView.render(model.state.recipe);
+    ResultsView.render(model.state.search.results);
   } catch (e) {
     console.error(`${e} yooooooooooooo`);
     RecipeView._renderError();
@@ -25,14 +27,14 @@ async function controlRecipes() {
 
 async function controlSearchResults() {
   try {
-    const query = SearchView._getQuery();
+    const query = SearchView.getQuery();
 
     if (!query) return;
 
     await model.loadSearchResult(query);
-    console.log(model.state.search.results);
+    ResultsView.render(model.state.search.results);
   } catch (err) {
-    console.log(`${err} yoy`);
+    console.error(`${err} yoy`);
   }
 }
 
