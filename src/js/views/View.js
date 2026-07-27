@@ -1,6 +1,6 @@
 export default class View {
   _data;
-  _errorMessage = "We could not find that recipe , please try another one !";
+  _errorMessage = "Couldn't get it , please try again or another one !";
 
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0))

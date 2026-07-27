@@ -4,6 +4,7 @@ import * as model from "./model.js";
 import RecipeView from "./views/recipeView.js";
 import SearchView from "./views/searchView.js";
 import ResultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
 
 //https://forkify-api.herokuapp.com/v2
 const recipeContainer = document.getElementById("recipe-container");
@@ -18,7 +19,6 @@ async function controlRecipes() {
     RecipeView.renderSpinner();
     await model.loadRecipe(id);
     RecipeView.render(model.state.recipe);
-    ResultsView.render(model.state.search.results);
   } catch (e) {
     console.error(`${e} yooooooooooooo`);
     RecipeView._renderError();
@@ -32,18 +32,25 @@ async function controlSearchResults() {
     if (!query) return;
 
     await model.loadSearchResult(query);
-    ResultsView.render(model.state.search.results);
+    ResultsView.render(model.getSearchResultsPage());
+    paginationView.render(model.state.search);
   } catch (err) {
     console.error(`${err} yoy`);
   }
 }
 
+function controlPagination(goToPage) {
+  ResultsView.render(model.getSearchResultsPage(goToPage));
+
+  paginationView.render(model.state.search);
+
+  console.log(goToPage);
+}
+
 function init() {
-  RecipeView._addHandlerRender(controlRecipes);
-  SearchView._addHandlerSearch(controlSearchResults);
+  RecipeView.addHandlerRender(controlRecipes);
+  SearchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 }
 
 init();
-
-// const AllIds = fetch("https://forkify-api.jonas.io/api/v2/recipes?search=rice");
-// AllIds.then(res => res.json()).then(data => console.log(data));

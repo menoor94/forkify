@@ -3,7 +3,7 @@ import View from "./View.js";
 class RecipeView extends View {
   _parentElement = document.getElementById("recipe-container");
 
-  _addHandlerRender(handler) {
+  addHandlerRender(handler) {
     ["load", "hashchange"].forEach(e => window.addEventListener(e, handler));
   }
 
