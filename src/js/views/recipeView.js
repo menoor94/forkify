@@ -2,9 +2,31 @@ import View from "./View.js";
 
 class RecipeView extends View {
   _parentElement = document.getElementById("recipe-container");
+  servings = 4;
 
   addHandlerRender(handler) {
     ["load", "hashchange"].forEach(e => window.addEventListener(e, handler));
+  }
+
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener("click", e => {
+      const btn = e.target.closest(".serving-change-btn");
+      if (!btn) return;
+      console.log(btn);
+      if (btn.classList.contains("serving-increase")) {
+        console.log("increased servings");
+        this.servings++;
+        console.log(this.servings);
+      }
+      if (btn.classList.contains("serving-decrease")) {
+        console.log("decreased servings");
+        if (this.servings === 1) return;
+        this.servings--;
+        console.log(this.servings);
+      }
+
+      handler();
+    });
   }
 
   _generateMarkup() {
@@ -24,7 +46,12 @@ class RecipeView extends View {
            </p>
            <p class="text-grey-dark-2 w-1/3">
            <i class="fa fa-users text-primary"></i>  ${this._data.servings} Servings
-          <i class="fa fa-minus text-primary text-sm cursor-pointer"></i> <i class="fa fa-plus text-sm cursor-pointer text-primary"></i> 
+           <button class="serving-change-btn cursor-pointer serving-decrease">
+            <i class=" fa fa-minus text-primary text-sm"></i> 
+           </button>
+           <button class="serving-change-btn cursor-pointer serving-increase">
+            <i class=" fa fa-plus text-sm text-primary"></i> 
+           </button>
            </p>
 
            <p>
