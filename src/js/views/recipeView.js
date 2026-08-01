@@ -2,7 +2,7 @@ import View from "./View.js";
 
 class RecipeView extends View {
   _parentElement = document.getElementById("recipe-container");
-  servings = 4;
+  // servings = 4;
 
   addHandlerRender(handler) {
     ["load", "hashchange"].forEach(e => window.addEventListener(e, handler));
@@ -12,20 +12,18 @@ class RecipeView extends View {
     this._parentElement.addEventListener("click", e => {
       const btn = e.target.closest(".serving-change-btn");
       if (!btn) return;
-      console.log(btn);
-      if (btn.classList.contains("serving-increase")) {
-        console.log("increased servings");
-        this.servings++;
-        console.log(this.servings);
-      }
-      if (btn.classList.contains("serving-decrease")) {
-        console.log("decreased servings");
-        if (this.servings === 1) return;
-        this.servings--;
-        console.log(this.servings);
-      }
 
-      handler();
+      // if (btn.classList.contains("serving-increase")) {
+      //   this.servings++;
+      // }
+      // if (btn.classList.contains("serving-decrease")) {
+      //   if (this.servings === 1) return;
+      //   this.servings--;
+      // }
+
+      const { updateTo } = btn.dataset;
+
+      if (+updateTo > 0) handler(+updateTo);
     });
   }
 
@@ -36,20 +34,24 @@ class RecipeView extends View {
             <div class="absolute inset-0 mix-blend-multiply bg-linear-to-br from-grad-1 to-grad-2 opacity-70"></div>
 
             <h1 class=" text-white absolute bottom-0 -rotate-6 text-wrap w-1/2 text-center">
-            <span class="box-decoration-clone  bg-linear-to-br text-sm lg:text-2xl/7  text-center  from-grad-1 to-grad-2 ">${this._data.title}<span/>
+            <span class="box-decoration-clone  bg-linear-to-br text-sm lg:text-2xl/7  text-center  from-grad-1 to-grad-2 ">${this._data.title}</span>
             </h1>
           </figure>
 
           <div class="m-4 flex flex-row justify-between  "> 
            <p class="text-grey-dark-2 w-1/3">
-            <i class="fa fa-clock text-primary"></i> ${this._data.cookingTime} min
+            <i class="fa fa-clock text-primary"></i> <span>
+             ${this._data.cookingTime} min
+            </span>
            </p>
            <p class="text-grey-dark-2 w-1/3">
-           <i class="fa fa-users text-primary"></i>  ${this._data.servings} Servings
-           <button class="serving-change-btn cursor-pointer serving-decrease">
+           <i class="fa fa-users text-primary"></i> <span>
+              ${this._data.servings} Servings
+            </span> 
+           <button class="serving-change-btn cursor-pointer serving-decrease" data-update-to="${this._data.servings - 1}">
             <i class=" fa fa-minus text-primary text-sm"></i> 
            </button>
-           <button class="serving-change-btn cursor-pointer serving-increase">
+           <button class="serving-change-btn cursor-pointer serving-increase" data-update-to="${this._data.servings + 1}">
             <i class=" fa fa-plus text-sm text-primary"></i> 
            </button>
            </p>
@@ -91,10 +93,13 @@ class RecipeView extends View {
     return `
       <li class="text-sm lg:text-base w-full lg:w-2/5 ">
       <i class="fa fa-check text-primary"></i>
-       ${!ing.quantity ? "" : ing.quantity} 
-      ${ing.unit} 
-      
-       ${ing.description}</li>
+      <span> 
+      ${!ing.quantity ? "" : ing.quantity} 
+     ${ing.unit} 
+     
+      ${ing.description}
+      </span>
+      </li>
     `;
   }
 }

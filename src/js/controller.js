@@ -40,10 +40,11 @@ async function controlSearchResults() {
   }
 }
 
-function controlServings() {
-  model.updateServings(RecipeView.servings);
+function controlServings(newServing) {
+  model.updateServings(newServing);
 
-  RecipeView.render(model.state.recipe);
+  // RecipeView.render(model.state.recipe);
+  RecipeView.update(model.state.recipe);
 }
 
 function controlPagination(goToPage) {
