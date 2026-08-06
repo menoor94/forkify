@@ -7,6 +7,10 @@ adjust serving sizes on the fly, and save your favorites for later.
 ✨ Features
 -📖 View recipe details — ingredients, cooking time, servings, and preparation info
 -📱 Responsive design — works across desktop, tablet, and mobile
+-🔍Search for any recipe 
+-🔖Bookmark your favorite recipes
+- Change the recipe servings 
+
 
 🛠️ Built With
 -HTML5
@@ -15,4 +19,4 @@ adjust serving sizes on the fly, and save your favorites for later.
 -Font Awesome for icons
 -Forkify API for recipe data
 
-This web application is still incomplete
+This web application is nearly completed
