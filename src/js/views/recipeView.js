@@ -27,6 +27,14 @@ class RecipeView extends View {
     });
   }
 
+  addHandlerBookmark(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".bookmark--btn");
+      if (!btn) return;
+      handler();
+    });
+  }
+
   _generateMarkup() {
     return `
     <figure id="recipe-fig" class="relative flex justify-center">
@@ -58,9 +66,9 @@ class RecipeView extends View {
 
            <p>
            <i class="fa fa-user text-primary cursor-pointer"></i> 
-           <span class="bg-linear-to-br from-grad-1 to-grad-2 rounded-2xl p-1">
-           <i class="fa-regular fa-bookmark text-white cursor-pointer "></i> 
-           </span>
+           <button class="bookmark--btn bg-linear-to-br from-grad-1 to-grad-2 rounded-2xl p-1">
+           <i class="${this._data.bookmarked === true ? "fa" : "fa-regular"} fa-bookmark text-white cursor-pointer "></i> 
+           </button>
            </p>
           </div>
 

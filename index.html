@@ -46,12 +46,25 @@
               >Add recipe
             </span>
           </button>
-          <button
-            class="mx-2 flex items-center hover:scale-110 transition cursor-pointer"
-          >
-            <i class="fa fa-bookmark text-primary"></i>
-            <span class="hidden lg:inline-block text-lg">Bookmarks</span>
-          </button>
+
+          <div class="group relative">
+            <button
+              class="mx-2 flex items-center hover:scale-110 transition cursor-pointer"
+            >
+              <i class="fa fa-bookmark text-primary"></i>
+              <span class="hidden lg:inline-block text-lg">Bookmarks</span>
+            </button>
+
+            <ul
+              id="bookmark--list"
+              class="hidden scrollbar group-focus-within:block absolute z-10 top-10 right-0 max-h-72 p-2 w-96 shadow-[0_0_15px_rgba(0,0,0,0.2)] bg-white overflow-scroll"
+            >
+              <p class="no-bookmark-msg text-primary lg:text-xl cursor-default">
+                <i class="fas fa-frown text-primary"></i>
+                <span class=""> There is no bookmarks yet! </span>
+              </p>
+            </ul>
+          </div>
         </div>
       </header>
       <div id="app-body" class="flex flex-row h-full flex-1 min-h-0">

@@ -2,12 +2,15 @@ export default class View {
   _data;
   _errorMessage = "Couldn't get it , please try again or another one !";
 
-  render(data) {
+  render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this._renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
+
     this._clear();
     this._parentElement.insertAdjacentHTML("beforeend", markup);
   }
@@ -56,9 +59,9 @@ export default class View {
 
   _renderError(message = this._errorMessage) {
     const markup = `
-      <div class="p-4 "> 
+      <div class="p-3 "> 
        
-        <p class="text-primary lg:text-xl">  <i class="fa fa-triangle-exclamation text-primary lg:text-xl"></i>${message}</p>
+        <p class="text-primary lg:text-xl"> </i>${message}</p>
       </div>
     `;
 
